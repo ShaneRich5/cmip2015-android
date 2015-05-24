@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ public class ApplianceAdapter extends RecyclerView.Adapter<ApplianceAdapter.View
     private LayoutInflater mInflater;
     private Context mContext;
 
+    private SparseBooleanArray selectedItems;
+
     public ApplianceAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
@@ -38,6 +41,9 @@ public class ApplianceAdapter extends RecyclerView.Adapter<ApplianceAdapter.View
         notifyDataSetChanged();
     }
 
+
+
+
     @Override
     public ViewHolderAppliance onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.row_appliance, parent, false);
@@ -46,6 +52,7 @@ public class ApplianceAdapter extends RecyclerView.Adapter<ApplianceAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolderAppliance holder, int position) {
+
         Appliance currentAppliance = mApplianceList.get(position);
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), currentAppliance.getIcon());
 
@@ -66,6 +73,7 @@ public class ApplianceAdapter extends RecyclerView.Adapter<ApplianceAdapter.View
 
         public ViewHolderAppliance(View itemView) {
             super(itemView);
+            itemView.setClickable(true);
             thumbnail = (ImageView) itemView.findViewById(R.id.appliance_thumbnail);
             title = (TextView) itemView.findViewById(R.id.appliance_title);
             watts = (TextView) itemView.findViewById(R.id.appliance_watts);

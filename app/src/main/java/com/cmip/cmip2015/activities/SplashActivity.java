@@ -144,7 +144,7 @@ public class SplashActivity extends AppCompatActivity
 
     @Override
     public void cancelLogin() {
-
+        dialog.dismiss();
     }
 
     @Override
@@ -154,6 +154,6 @@ public class SplashActivity extends AppCompatActivity
 
     @Override
     public void cancelRegistration() {
-
+        dialog.dismiss();
     }
 }

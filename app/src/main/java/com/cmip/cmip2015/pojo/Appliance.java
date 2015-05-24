@@ -16,6 +16,7 @@ public class Appliance implements Serializable {
     private double hours;
     private int amount;
     private int icon = R.drawable.ic_launcher;
+    private boolean selected = false;
 
     public Appliance() {
     }

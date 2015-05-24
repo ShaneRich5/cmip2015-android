@@ -15,12 +15,14 @@ import android.widget.TextView;
 import com.cmip.cmip2015.R;
 import com.cmip.cmip2015.adapters.ApplianceAdapter;
 import com.cmip.cmip2015.databases.ApplianceDatabase;
+import com.cmip.cmip2015.databases.DatabaseHandler;
 import com.cmip.cmip2015.fragments.NavDrawerFragment;
 import com.cmip.cmip2015.pojo.Appliance;
 import com.cmip.cmip2015.views.DividerItemDecoration;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserApplianceActivity extends ActionBarActivity {
     private Toolbar toolbar;
@@ -29,6 +31,7 @@ public class UserApplianceActivity extends ActionBarActivity {
     private NavDrawerFragment mDrawerFragment;
     private FloatingActionButton fab;
     private TextView tvEmptyRecycler;
+    private DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +40,11 @@ public class UserApplianceActivity extends ActionBarActivity {
 
         tvEmptyRecycler = (TextView) findViewById(R.id.empty_rv);
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        ApplianceDatabase db = new ApplianceDatabase(this);
-        ArrayList<Appliance> data = db.readAppliances();
+        db = new DatabaseHandler(this);
 
         setupToolbar();
         setupDrawer();
-        setupRecyclerView(data);
+        setupRecyclerView();
         setupFAB();
     }
 
@@ -79,23 +81,23 @@ public class UserApplianceActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupRecyclerView(ArrayList<Appliance> data) {
+    private void setupRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mAdapter = new ApplianceAdapter(this);
-
-        if (data == null) {
-            tvEmptyRecycler.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-        }else {
-            mAdapter.setAppliances(data);
-            tvEmptyRecycler.setVisibility(View.GONE);
-            mRecyclerView.setVisibility(View.VISIBLE);
-        }
-
         mRecyclerView = (RecyclerView) findViewById(R.id.list_appliances);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setAdapter(mAdapter);
+
+        if (db.getAppliancesCount() > 0) {
+            ArrayList<Appliance> data = db.getAllAppliances();
+            mAdapter.setAppliances(data);
+            tvEmptyRecycler.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }else {
+            tvEmptyRecycler.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        }
     }
 
     private void setupDrawer() {

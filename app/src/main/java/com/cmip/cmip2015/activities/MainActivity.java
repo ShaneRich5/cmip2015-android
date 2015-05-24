@@ -20,6 +20,7 @@ import com.cmip.cmip2015.R;
 import com.cmip.cmip2015.adapters.AppBarSpinnerAdapter;
 import com.cmip.cmip2015.adapters.ApplianceAdapter;
 import com.cmip.cmip2015.fragments.NavDrawerFragment;
+import com.cmip.cmip2015.listeners.RecyclerItemClickListener;
 import com.cmip.cmip2015.logs.Logger;
 import com.cmip.cmip2015.pojo.Appliance;
 import com.cmip.cmip2015.pojo.SpinnerNavItem;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements Spinner.OnItemSel
     private ApplianceAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private NavDrawerFragment mDrawerFragment;
+    private int totalSelected = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,18 @@ public class MainActivity extends AppCompatActivity implements Spinner.OnItemSel
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+
+                    }
+                }));
     }
 
     private void setupDrawer() {
@@ -120,14 +134,17 @@ public class MainActivity extends AppCompatActivity implements Spinner.OnItemSel
             case 0:
                 Logger.toastShort(this, "Light");
                 mAdapter.setAppliances(Appliance.lightBundle());
+                mAdapter.notifyDataSetChanged();
                 break;
             case 1:
                 Logger.toastShort(this, "Medium");
                 mAdapter.setAppliances(Appliance.mediumBundle());
+                mAdapter.notifyDataSetChanged();
                 break;
             case 2:
                 Logger.toastShort(this, "Heavy");
                 mAdapter.setAppliances(Appliance.heavyBundle());
+                mAdapter.notifyDataSetChanged();
                 break;
         }
     }

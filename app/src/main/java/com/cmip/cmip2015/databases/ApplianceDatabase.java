@@ -99,8 +99,22 @@ public class ApplianceDatabase {
         return listAppliances;
     }
 
-    private void deleteAppliances() {
+    public void deleteAppliances() {
         mDatabase.delete(ApplianceHelper.TABLE_APPLIANCE, null, null);
+    }
+
+    public boolean isEmpty() {
+        boolean empty = true;
+        Cursor cursor = mDatabase.rawQuery("SELECT COUNT(*) FROM" + ApplianceHelper.TABLE_APPLIANCE, null);
+
+        if ((cursor != null) && (cursor.moveToFirst())) {
+            empty = (cursor.getInt(0) == 0);
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return empty;
     }
 
     private static class ApplianceHelper extends SQLiteOpenHelper {

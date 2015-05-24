@@ -27,4 +27,5 @@
     </string-array>
     <string name="title_activity_user_appliance_ativity">UserApplianceAtivity</string>
     <string name="No_appliances_added">No appliances added</string>
+    <string name="banner_image_description">The app\'s banner image</string>
 </resources>

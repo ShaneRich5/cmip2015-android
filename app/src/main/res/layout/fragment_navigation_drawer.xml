@@ -5,15 +5,22 @@
     android:background="@android:color/white"
     tools:context="com.cmip.cmip2015.fragments.NavigationDrawerFragment">
 
+    <ImageView android:id="@+id/banner_image"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/banner_image_description"
+        android:src="@drawable/navbanner"
+        android:layout_alignParentTop="true"/>
+
     <RelativeLayout
         android:id="@+id/header_container"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#FB8C00">
+        android:background="@color/primary_dark">
 
         <LinearLayout
             android:padding="10dp"
-            android:paddingBottom="10dp"
+            android:paddingBottom="5dp"
             android:id="@+id/user_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
