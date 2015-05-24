@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:src="@drawable/ic_launcher"
+        android:id="@+id/appliance_thumbnail"
+        android:layout_width="54dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:contentDescription="@string/appliance_thumbnail"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/appliance_thumbnail"
+        android:layout_toEndOf="@+id/appliance_thumbnail" >
+
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/appliance_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"/>
+
+        <TextView
+            android:id="@+id/appliance_watts"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_below="@+id/appliance_title"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
